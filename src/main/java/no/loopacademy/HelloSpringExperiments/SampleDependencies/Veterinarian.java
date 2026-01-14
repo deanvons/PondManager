@@ -1,8 +1,10 @@
 package no.loopacademy.HelloSpringExperiments.SampleDependencies;
 
+import org.springframework.stereotype.Component;
+
+
+@Component
 public class Veterinarian {
-
-
 
     private Duck duck;
     public Veterinarian(Duck duck){

@@ -2,7 +2,7 @@ package no.loopacademy.HelloSpringExperiments.SampleDependencies;
 
 import org.springframework.stereotype.Component;
 
-
+@Component
 public class Ornothologist {
 
     // provided by spring DI
