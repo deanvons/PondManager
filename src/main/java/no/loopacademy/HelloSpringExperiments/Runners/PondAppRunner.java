@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
-import no.loopacademy.HelloSpringExperiments.SampleDependencies.Ornothologist;
+import no.loopacademy.HelloSpringExperiments.SampleDependencies.User;
 import no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Veterinarian;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 // Also ensure you are storing classes you want Spring to scan in the same package as the spring applcation main
 @Component
 public class PondAppRunner implements ApplicationRunner {
-    private final Ornothologist orno;
+    private final User orno;
 
-    public PondAppRunner(Ornothologist orno,Veterinarian vet){
+    public PondAppRunner(User orno, Veterinarian vet){
         this.orno = orno;
     }
 
@@ -34,7 +34,9 @@ public class PondAppRunner implements ApplicationRunner {
         // Also has some functional requirements
         // - Look for signs of disease
         // - Send ducks in for diagnosis or quarantine
-        // we will start to see the boundaries of the system and our toy OOP
+        // we will start to see the boundaries of the system and our toy OOP case
+
+        // The application actually just runs methods that alter entity state via a DB based on user interaction
 
 
 
