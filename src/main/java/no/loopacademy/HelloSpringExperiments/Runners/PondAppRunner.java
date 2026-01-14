@@ -36,7 +36,7 @@ public class PondAppRunner implements ApplicationRunner {
         // - Send ducks in for diagnosis or quarantine
         // we will start to see the boundaries of the system and our toy OOP case
 
-        // The application actually just runs methods that alter entity state via a DB based on user interaction
+        // The application actually just runs methods that alter entity state via a DB, based on user interaction
 
 
 
