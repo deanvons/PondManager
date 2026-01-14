@@ -1,7 +1,7 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
 import no.loopacademy.HelloSpringExperiments.SampleDependencies.Ornothologist;
-import no.loopacademy.HelloSpringExperiments.SampleDependencies.Veterinarian;
+import no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Veterinarian;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -11,11 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PondAppRunner implements ApplicationRunner {
     private final Ornothologist orno;
-    private  final Veterinarian vet;
 
     public PondAppRunner(Ornothologist orno,Veterinarian vet){
         this.orno = orno;
-        this.vet = vet;
     }
 
     @Override
