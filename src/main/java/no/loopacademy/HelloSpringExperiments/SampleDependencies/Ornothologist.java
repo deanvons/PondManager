@@ -2,6 +2,7 @@ package no.loopacademy.HelloSpringExperiments.SampleDependencies;
 
 import org.springframework.stereotype.Component;
 
+// Spring manages this classes object creation
 @Component
 public class Ornothologist {
 
@@ -11,7 +12,7 @@ public class Ornothologist {
         this.duck = duck;
     }
 
-    public void ConfirmValidDuckObject(){
+    public void confirmValidDuckObject(){
         duck.quack();
     }
 

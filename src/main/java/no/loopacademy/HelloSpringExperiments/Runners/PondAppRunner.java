@@ -1,6 +1,5 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
-import no.loopacademy.HelloSpringExperiments.SampleDependencies.Duck;
 import no.loopacademy.HelloSpringExperiments.SampleDependencies.Ornothologist;
 import no.loopacademy.HelloSpringExperiments.SampleDependencies.Veterinarian;
 import org.springframework.boot.ApplicationArguments;
@@ -27,9 +26,13 @@ public class PondAppRunner implements ApplicationRunner {
         // If an object (like Ornothologist) has dependencies that you expect Spring to provide (like Duck), then that object also needs to be created by Spring,
         // otherwise Spring never gets a chance to inject anything.
 
+        // How to decide?
+        // Spring beans are primarily about centrally managing and distributing shared objects (usually singletons).
+        // Anything that is not shared or long-lived (pure domain objects or many instances) shifts creation responsibility to the developer — often via factories.
+
         // Duck duck = new Duck(); // 1) herein lies the problem, becomes a problem when this class is required elsewhere too
         // = new Ornothologist(duck); // we are trying to be responsible for it here, if that is the case then we must provide the Duck object
-        orno.ConfirmValidDuckObject();
+        orno.confirmValidDuckObject();
 
         // maybe tempting to do this to bypass springs factories
         // Ornothologist ornoNoDuck = new Ornothologist(null); // we are trying to be responsible for it here, if that is the case then we must provide the Duck object
