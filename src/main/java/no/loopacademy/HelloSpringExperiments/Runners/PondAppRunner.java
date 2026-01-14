@@ -30,17 +30,15 @@ public class PondAppRunner implements ApplicationRunner {
         // Spring beans are primarily about centrally managing and distributing shared objects (usually singletons).
         // Anything that is not shared or long-lived (pure domain objects or many instances) shifts creation responsibility to the developer — often via factories.
 
-        // Duck duck = new Duck(); // 1) herein lies the problem, becomes a problem when this class is required elsewhere too
-        // = new Ornothologist(duck); // we are trying to be responsible for it here, if that is the case then we must provide the Duck object
-        orno.confirmValidDuckObject();
+        // Need to make some decisions -> what is are the requirements of this application
+        // also need to move away from thinking in terms of object behavior and rather application behavior (storing information) -> objects represent and facilitate
+        // Ornithologist is studying Ducks -> needs to store info about them and their behaviour
+        // Also has some functional requirements
+        // - Look for signs of disease
+        // - Send ducks in for diagnosis or quarantine
+        // we will start to see the boundaries of the system and our toy OOP
 
-        // maybe tempting to do this to bypass springs factories
-        // Ornothologist ornoNoDuck = new Ornothologist(null); // we are trying to be responsible for it here, if that is the case then we must provide the Duck object
-        // orno.ConfirmValidDuckObject(); // null reference 💀
 
-        // Duck duckForVet = new Duck(); // 1) problem, do we need the same duck or what? We need to consider creation responsibility when deciding on using DI
-        // Veterinarian vet = new Veterinarian(duckForVet); // we are trying to be responsible for it here, if that is the case then we must provide the Duck object
-        vet.checkForHealthyQuack();
 
     }
 }
