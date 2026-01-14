@@ -11,10 +11,6 @@ public class Ornothologist {
         this.duck = duck;
     }
 
-    public Ornothologist(){
-
-    }
-
     public void ConfirmValidDuckObject(){
         duck.quack();
     }
