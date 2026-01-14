@@ -1,6 +1,8 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
-import no.loopacademy.HelloSpringExperiments.SampleDependencies.User;
+import no.loopacademy.HelloSpringExperiments.DataAccess.DuckDataAccess;
+import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.Entities.User;
 import no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Veterinarian;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,11 +12,11 @@ import org.springframework.stereotype.Component;
 // Also ensure you are storing classes you want Spring to scan in the same package as the spring applcation main
 @Component
 public class PondAppRunner implements ApplicationRunner {
-    private final User orno;
-
-    public PondAppRunner(User orno, Veterinarian vet){
-        this.orno = orno;
-    }
+//    private final User orno;
+//
+//    public PondAppRunner(User orno, Veterinarian vet){
+//        this.orno = orno;
+//    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -38,6 +40,16 @@ public class PondAppRunner implements ApplicationRunner {
 
         // The application actually just runs methods that alter entity state via a DB, based on user interaction
 
+        // Check Duck list -> read from DB but what does the table look like
+
+        // Add a duck
+
+
+        DuckDataAccess dao = new DuckDataAccess();
+
+        var duckList = dao.findAll();
+
+        System.out.println(duckList.get(1).getNickName());
 
 
     }

@@ -1,6 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.SampleDependencies;
-
-import org.springframework.stereotype.Component;
+package no.loopacademy.HelloSpringExperiments.Entities;
 
 // Spring no longer manages this classes object creation. It is a pure value object / entity
 public class Duck {

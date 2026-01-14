@@ -1,6 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.SampleDependencies;
-
-import org.springframework.stereotype.Component;
+package no.loopacademy.HelloSpringExperiments.Entities;
 
 public class User {
 
