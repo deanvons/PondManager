@@ -1,9 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckDataAccess;
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
-import no.loopacademy.HelloSpringExperiments.Entities.User;
-import no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Veterinarian;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -47,7 +44,9 @@ public class PondAppRunner implements ApplicationRunner {
 
         DuckDataAccess dao = new DuckDataAccess();
 
-        var duckList = dao.findAll();
+        var duckList = dao.selectAll();
+
+        //dao.save
 
         System.out.println(duckList.get(1).getNickName());
 
