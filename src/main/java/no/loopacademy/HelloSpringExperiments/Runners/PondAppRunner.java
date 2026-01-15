@@ -1,6 +1,7 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckDataAccess;
+import no.loopacademy.HelloSpringExperiments.Entities.Duck;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -39,16 +40,24 @@ public class PondAppRunner implements ApplicationRunner {
 
         // Check Duck list -> read from DB but what does the table look like
 
+        DuckDataAccess dao = new DuckDataAccess();
+
         // Add a duck
 
+        Duck freshQuacker = new Duck();
+        freshQuacker.setNickName("Mervin");
+        freshQuacker.setAge(2);
+        freshQuacker.setWeight(5.3);
 
-        DuckDataAccess dao = new DuckDataAccess();
+        // dao.insert(freshQuacker);
+
+        // Show all ducks
+
 
         var duckList = dao.selectAll();
 
-        //dao.save
+        duckList.forEach(duck ->  System.out.println(duck.getNickName()));
 
-        System.out.println(duckList.get(1).getNickName());
 
 
     }
