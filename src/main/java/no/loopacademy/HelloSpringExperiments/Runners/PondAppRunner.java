@@ -1,9 +1,7 @@
 package no.loopacademy.HelloSpringExperiments.Runners;
 
 
-import no.loopacademy.HelloSpringExperiments.DataAccess.DuckDataAccessOption;
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -26,17 +24,7 @@ public class PondAppRunner implements ApplicationRunner {
 
         // Check Duck list -> read from DB but what does the table look like
 
-        // Add a duck
-
-//        Duck freshQuacker = new Duck();
-//        freshQuacker.setNickName("Jimmy");
-//        freshQuacker.setAge(2);
-//        freshQuacker.setWeight(5.3);
-//
-//        dao.insert(freshQuacker);
-
-        // Show all ducks
-
+        // now we can interact with the duck data in a way what feels like a collection
         var duckList = duckRepository.getAll();
 
         duckList.forEach(duck ->  System.out.println(duck.getNickName()));
