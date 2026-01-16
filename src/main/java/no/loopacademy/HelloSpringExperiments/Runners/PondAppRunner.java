@@ -29,7 +29,13 @@ public class PondAppRunner implements ApplicationRunner {
 
         duckList.forEach(duck ->  System.out.println(duck.getNickName()));
 
+        // this area of our application is essentially where we decide what code to run based on the user needs / input
 
+        // right now we are simple executing operations on duck data directly for experimentation
+
+        // no business rules or indication of what needs to run in response to the user
+
+        // We need a class/layer dedicated to business logic (SERVICE) and to user responses (CONTROLLER)
 
     }
 }
