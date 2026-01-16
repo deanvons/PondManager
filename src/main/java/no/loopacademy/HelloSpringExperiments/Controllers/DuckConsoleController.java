@@ -17,7 +17,7 @@ public class DuckConsoleController {
 
     public void start() {
         System.out.println("Running......let's do some duck stuff");
-        System.out.println("Duck API (console). Type: help");
+        System.out.println("Duck (console) listening for commands. Type: help");
 
         try (Scanner sc = new Scanner(System.in)) {
             while (true) {
