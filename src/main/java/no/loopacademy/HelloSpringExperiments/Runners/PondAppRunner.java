@@ -2,6 +2,7 @@ package no.loopacademy.HelloSpringExperiments.Runners;
 
 
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
+import no.loopacademy.HelloSpringExperiments.Services.DuckService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Component;
 // Also ensure you are storing classes you want Spring to scan in the same package as the spring applcation main
 @Component
 public class PondAppRunner implements ApplicationRunner {
-    private final DuckRepository duckRepository;
+    private final DuckService duckService;
 
-    public PondAppRunner(DuckRepository duckRepository){
-        this.duckRepository = duckRepository;
+    public PondAppRunner(DuckService duckService){
+        this.duckService = duckService;
     }
 
     @Override
@@ -24,18 +25,16 @@ public class PondAppRunner implements ApplicationRunner {
 
         // Check Duck list -> read from DB but what does the table look like
 
-        // now we can interact with the duck data in a way what feels like a collection
-        var duckList = duckRepository.getAll();
+        // now we can interact with the duck data in a way what feels like a business process
+        var duckList = duckService.listDucks();
 
         duckList.forEach(duck ->  System.out.println(duck.getNickName()));
 
         // this area of our application is essentially where we decide what code to run based on the user needs / input
 
-        // right now we are simple executing operations on duck data directly for experimentation
+        // business rules exist only in the services
 
-        // no business rules or indication of what needs to run in response to the user
-
-        // We need a class/layer dedicated to business logic (SERVICE) and to user responses (CONTROLLER)
+        // We need a class/layer dedicated to buser responses (CONTROLLER)
 
     }
 }
