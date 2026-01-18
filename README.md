@@ -96,3 +96,27 @@ Each branch represents a deliberate architectural step.
 
 ## Current architecture
 
+[ Console ]
+
+👇
+
+[ Controller ]
+
+👇
+
+[ Service ]
+
+👇
+
+[ Repository ]
+
+👇
+
+[ JDBC / SQL ]
+
+## Notes
+
+- The UserControl branch is the latest milestone and deliberately stops at the console boundary.
+- The next step will introduce Hibernate, Spring Data, and HTTP
+  without changing the core structure.
+- The goal is to *earn* abstractions, not assume them.
