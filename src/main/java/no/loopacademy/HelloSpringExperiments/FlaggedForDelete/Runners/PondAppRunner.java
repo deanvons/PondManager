@@ -1,4 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.Runners;
+package no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Runners;
 
 
 import no.loopacademy.HelloSpringExperiments.Controllers.DuckConsoleController;
@@ -20,6 +20,6 @@ public class PondAppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        duckConsoleController.start();
+
     }
 }
