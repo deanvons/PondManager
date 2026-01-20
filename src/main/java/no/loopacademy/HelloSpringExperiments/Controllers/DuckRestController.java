@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +20,13 @@ import java.util.List;
 @RestController
 public class DuckRestController {
 
-    // todos
-    // error handling
-    // DTOs
-    // path variables
-    // mvc mock tests
-    // db interaction tests
-    // seeding
-    // hibernate
-    //
+    // todos current priority'
+    // [] - remaining endpoints
+    // [] - error handling
+    // [] - DTOs
+    // [] - mvc mock tests
+    // [] - db interaction tests
+
 
     // same service as before, we are only changing the distribution layer
     private DuckService service;
@@ -78,7 +78,7 @@ public class DuckRestController {
 
 
     @GetMapping("/ducks/DTO/{id}")
-    public ResponseEntity<DuckReadDTO> getDuckById (@PathVariable Integer id){
+    public ResponseEntity<DuckReadDTO> getDTODuckById (@PathVariable Integer id){
 //        if(message == "secret") -> doesnt compare the value it compares the
         var modelDuck = service.getDuck(id);
 
@@ -112,16 +112,32 @@ public class DuckRestController {
             return ResponseEntity.badRequest().build();
     }
 
-    // uri GET https:localhost:8080/ducks/4
-//    @GetMapping("/ducks/{id}")
-//    public ResponseEntity<Duck> getDuckById(@PathVariable int id) {
-//
-//        //var duck = service.getDuck(id);
-//
-//        // could handle the error here
-//
-//        return ResponseEntity.ok(duck);
-//    }
+    // GET /ducks/{id}
+    @GetMapping("/ducks/{id}")
+    public ResponseEntity<Duck> getDuckById(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.getDuck(id));
+    }
+
+    // POST /ducks
+    @PostMapping("/ducks")
+    public ResponseEntity<Duck> createDuck(@RequestBody Duck duck) {
+        Duck saved = service.registerDuck(duck);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    // PUT /ducks/{id}
+    @PutMapping("/ducks/{id}")
+    public ResponseEntity<Duck> updateDuck(@PathVariable Integer id, @RequestBody Duck duck) {
+        Duck updated = service.updateDuck(id, duck);
+        return ResponseEntity.ok(updated);
+    }
+
+    // DELETE /ducks/{id}
+    @DeleteMapping("/ducks/{id}")
+    public ResponseEntity<Void> deleteDuck(@PathVariable Integer id) {
+        service.removeDuck(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 

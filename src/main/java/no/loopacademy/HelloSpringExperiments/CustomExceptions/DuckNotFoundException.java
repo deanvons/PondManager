@@ -1,0 +1,11 @@
+package no.loopacademy.HelloSpringExperiments.CustomExceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class DuckNotFoundException extends RuntimeException {
+    public DuckNotFoundException(int id) {
+        super("Duck does not exist with ID: " + id);
+    }
+}
