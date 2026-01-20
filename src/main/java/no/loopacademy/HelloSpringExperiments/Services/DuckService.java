@@ -19,6 +19,7 @@ public class DuckService {
         return repository.getAll();
     }
 
+
     public Duck getDuck(int id) {
         return repository.getById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Duck not found: " + id));
