@@ -7,6 +7,7 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -37,19 +38,41 @@ public class DuckRestController {
         return ducks;
     }
 
+    @GetMapping("/http/sampleresponse")
+    public ResponseEntity<Void> getSampleHTTPResponseNoInput (){
+//        if(message == "secret") -> doesnt compare the value it compares the
+        return ResponseEntity.notFound().build();
+    }
+
+
     @GetMapping("/http/sample/{message}")
     public ResponseEntity<Void> getSampleHTTPResponse (@PathVariable String message){
+//        if(message == "secret") -> doesnt compare the value it compares the
+        if ("secret".equals(message))
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.badRequest().build();
+    }
 
-        return ResponseEntity.ok().build();
+    @GetMapping("/http/sample")
+    public ResponseEntity<Void> getSampleHTTPResponseWithRequestParam (@RequestParam String name){
+//        if(message == "secret") -> doesnt compare the value it compares the
+        if ("dean".equals(name))
+            return ResponseEntity.internalServerError().build();
+        else
+            return ResponseEntity.badRequest().build();
     }
 
     // uri GET https:localhost:8080/ducks/4
-    @GetMapping("/ducks/{id}")
-    public ResponseEntity<Duck> getDuckById(@PathVariable int id) {
-        var duck = service.getDuck(id);
-
-        return ResponseEntity.ok(duck);
-    }
+//    @GetMapping("/ducks/{id}")
+//    public ResponseEntity<Duck> getDuckById(@PathVariable int id) {
+//
+//        //var duck = service.getDuck(id);
+//
+//        // could handle the error here
+//
+//        return ResponseEntity.ok(duck);
+//    }
 
 
 

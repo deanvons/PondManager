@@ -75,8 +75,8 @@ public class DuckConsoleController {
         if (parts.length < 2) throw new IllegalArgumentException("Usage: get <id>");
         int id = Integer.parseInt(parts[1]);
 
-        Duck d = service.getDuck(id);
-        System.out.println(d.getId() + " | " + d.getNickName() + " | age=" + d.getAge() + " | weight=" + d.getWeight());
+        //Duck d = service.getDuck(id);
+        //System.out.println(d.getId() + " | " + d.getNickName() + " | age=" + d.getAge() + " | weight=" + d.getWeight());
     }
 
     private void create(String[] parts) {
