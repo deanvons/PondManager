@@ -1,4 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.Entities;
+package no.loopacademy.HelloSpringExperiments.Models;
 
 public class User {
 

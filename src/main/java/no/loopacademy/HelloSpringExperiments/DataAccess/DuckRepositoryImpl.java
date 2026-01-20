@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.DataAccess;
 
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -146,6 +146,8 @@ public class DuckRepositoryImpl implements  DuckRepository{
             throw new RuntimeException("Failed to delete duck with id " + id, e);
         }
     }
+
+
 
     private Duck mapRow(ResultSet rs) throws SQLException {
         Duck duck = new Duck();

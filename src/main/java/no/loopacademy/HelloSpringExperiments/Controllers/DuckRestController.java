@@ -1,15 +1,18 @@
 package no.loopacademy.HelloSpringExperiments.Controllers;
 
 
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.DTOConverters.DuckDTOConverter;
+import no.loopacademy.HelloSpringExperiments.DTOs.DuckReadDTO;
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
+import no.loopacademy.HelloSpringExperiments.Models.Pond;
 import no.loopacademy.HelloSpringExperiments.Services.DuckService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,15 +30,61 @@ public class DuckRestController {
 
     // same service as before, we are only changing the distribution layer
     private DuckService service;
-    public DuckRestController(DuckService duckService){
+    private DuckDTOConverter converter;
+    public DuckRestController(DuckService duckService, DuckDTOConverter converter){
         this.service  = duckService;
+        this.converter = converter;
     }
+
 
     // uri GET https:localhost:8080/ducks
     @GetMapping("/ducks")
     public List<Duck> getDucks() {
         var ducks = service.listDucks();
         return ducks;
+    }
+
+    @GetMapping("/ducks/models/{id}")
+    public ResponseEntity<Duck> getDuckModelById (@PathVariable Integer id){
+//        if(message == "secret") -> doesnt compare the value it compares the
+        var modelDuck = service.getDuck(id);
+
+        return ResponseEntity.ok(modelDuck);
+    }
+
+    @GetMapping("/sampleLoadedDuck")
+    public ResponseEntity<Duck> getDuckModelLoaded (){
+
+        Pond pond = new Pond();
+        pond.setId(1);
+        pond.setLocation("Løkka");
+        pond.setName("Junky Bridge");
+
+        var modelDuck = new Duck();
+        modelDuck.setId(2);
+        modelDuck.setAge(4);
+        modelDuck.setNickName("Jeff");
+        modelDuck.setWeight(43.2);
+        modelDuck.setPondId(1);
+        modelDuck.setPond(pond);
+
+        List<Duck> ducks = new ArrayList<>();
+        ducks.add(modelDuck);
+
+        pond.setDucks(ducks);
+
+        return ResponseEntity.ok(modelDuck);
+    }
+
+
+    @GetMapping("/ducks/DTO/{id}")
+    public ResponseEntity<DuckReadDTO> getDuckById (@PathVariable Integer id){
+//        if(message == "secret") -> doesnt compare the value it compares the
+        var modelDuck = service.getDuck(id);
+
+        var duckReadDto = converter.duckToReadDTO(modelDuck);
+
+        return ResponseEntity.ok(duckReadDto);
     }
 
     @GetMapping("/http/sampleresponse")

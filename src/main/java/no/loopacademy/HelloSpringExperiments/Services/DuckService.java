@@ -1,7 +1,7 @@
 package no.loopacademy.HelloSpringExperiments.Services;
 
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,17 +20,10 @@ public class DuckService {
     }
 
 
-//    public Duck getDuck(int id) {
-//
-//        var duck = repository.getById(id);
-//
-//        if(duck.isPresent()){
-//            return (Duck)duck;
-//        }
-//        else return
-//
-//                //.orElseThrow(() -> new IllegalArgumentException("Duck not found: " + id));
-//    }
+    public Duck getDuck(int id) {
+        return repository.getById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Duck not found: " + id));
+    }
 
     public Duck registerDuck(Duck duck) {
         // business rules belong here

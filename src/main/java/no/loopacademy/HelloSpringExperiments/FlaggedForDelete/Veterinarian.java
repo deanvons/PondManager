@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.FlaggedForDelete;
 
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
 
 // REMOVE
 public class Veterinarian {

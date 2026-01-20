@@ -1,4 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.Entities;
+package no.loopacademy.HelloSpringExperiments.Models;
 
 // Spring no longer manages this classes object creation. It is a pure value object / entity
 public class Duck {
@@ -7,6 +7,12 @@ public class Duck {
     private String nickName;
     private Integer age;
     private Double weight;
+
+    // fk for pond
+    private Integer PondId;
+
+    // navigation property
+    private Pond pond;
 
 
     public Integer getId() {
@@ -45,5 +51,21 @@ public class Duck {
     // The entity/value object is responsible for its own state + invariants only.
     public void quack(){
         System.out.println(this.nickName + " totally quacked");
+    }
+
+    public Integer getPondId() {
+        return PondId;
+    }
+
+    public void setPondId(Integer pondId) {
+        PondId = pondId;
+    }
+
+    public Pond getPond() {
+        return pond;
+    }
+
+    public void setPond(Pond pond) {
+        this.pond = pond;
     }
 }

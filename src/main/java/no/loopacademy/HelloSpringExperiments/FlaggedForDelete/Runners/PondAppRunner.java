@@ -3,6 +3,7 @@ package no.loopacademy.HelloSpringExperiments.FlaggedForDelete.Runners;
 
 import no.loopacademy.HelloSpringExperiments.Controllers.DuckConsoleController;
 import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
+import no.loopacademy.HelloSpringExperiments.Models.Pond;
 import no.loopacademy.HelloSpringExperiments.Services.DuckService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -20,6 +21,8 @@ public class PondAppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        Pond somePond = new Pond();
 
+        //somePond.Ducks.for //
     }
 }

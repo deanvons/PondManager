@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.Controllers;
 
-import no.loopacademy.HelloSpringExperiments.Entities.Duck;
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import no.loopacademy.HelloSpringExperiments.Services.DuckService;
 import org.springframework.stereotype.Component;
 
