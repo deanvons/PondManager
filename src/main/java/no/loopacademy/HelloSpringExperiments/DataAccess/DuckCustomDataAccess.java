@@ -14,7 +14,7 @@ public class DuckCustomDataAccess implements DataAccessCRUD{
     }
 
     @Override
-    public Duck HatchADuck(Duck duck) {
+    public Duck hatchADuck(Duck duck) {
         return null;
     }
 

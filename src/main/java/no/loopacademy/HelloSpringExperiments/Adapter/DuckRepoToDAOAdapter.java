@@ -13,29 +13,35 @@ public class DuckRepoToDAOAdapter implements DuckRepository {
     public DuckRepoToDAOAdapter(DuckCustomDataAccess oldInterface){
         this.oldInterface = oldInterface;
     }
-public
 
+    // this class adapts the interface methods to the implementation of another interface - that's it
     @Override
     public List<Duck> getAll() {
 
         oldInterface.findDucks();
-
 
         return List.of();
     }
 
     @Override
     public Optional<Duck> getById(int id) {
+
+        oldInterface.goFindARandomDuck();
         return Optional.empty();
     }
 
     @Override
     public Duck register(Duck duck) {
+        oldInterface.hatchADuck(duck);
+
         return null;
     }
 
     @Override
     public boolean update(Duck duck) {
+
+        oldInterface.ChangeADuck();
+
         return false;
     }
 
