@@ -21,9 +21,9 @@ import java.util.List;
 public class DuckRestController {
 
     // todos current priority'
-    // [] - remaining endpoints
-    // [] - error handling
-    // [] - DTOs
+    // [x] - remaining endpoints
+    // [x] - error handling
+    // [] - automate DTOs
     // [] - mvc mock tests
     // [] - db interaction tests
 
@@ -37,13 +37,7 @@ public class DuckRestController {
     }
 
 
-    // uri GET https:localhost:8080/ducks
-    @GetMapping("/ducks")
-    public List<Duck> getDucks() {
-        var ducks = service.listDucks();
-        return ducks;
-    }
-
+    // these just illustrate path variables, infinite referenceing etc
     @GetMapping("/ducks/models/{id}")
     public ResponseEntity<Duck> getDuckModelById (@PathVariable Integer id){
 //        if(message == "secret") -> doesnt compare the value it compares the
@@ -76,7 +70,6 @@ public class DuckRestController {
         return ResponseEntity.ok(modelDuck);
     }
 
-
     @GetMapping("/ducks/DTO/{id}")
     public ResponseEntity<DuckReadDTO> getDTODuckById (@PathVariable Integer id){
 //        if(message == "secret") -> doesnt compare the value it compares the
@@ -92,7 +85,6 @@ public class DuckRestController {
 //        if(message == "secret") -> doesnt compare the value it compares the
         return ResponseEntity.notFound().build();
     }
-
 
     @GetMapping("/http/sample/{message}")
     public ResponseEntity<Void> getSampleHTTPResponse (@PathVariable String message){
@@ -110,6 +102,16 @@ public class DuckRestController {
             return ResponseEntity.internalServerError().build();
         else
             return ResponseEntity.badRequest().build();
+    }
+
+
+    // these are our actual endpoints
+
+    // uri GET https:localhost:8080/ducks
+    @GetMapping("/ducks")
+    public List<Duck> getDucks() {
+        var ducks = service.listDucks();
+        return ducks;
     }
 
     // GET /ducks/{id}

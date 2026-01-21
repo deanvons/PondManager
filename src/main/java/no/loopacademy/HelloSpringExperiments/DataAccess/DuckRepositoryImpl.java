@@ -147,8 +147,7 @@ public class DuckRepositoryImpl implements  DuckRepository{
         }
     }
 
-
-
+    // helper method
     private Duck mapRow(ResultSet rs) throws SQLException {
         Duck duck = new Duck();
         duck.setId(rs.getInt("id"));
