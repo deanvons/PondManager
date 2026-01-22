@@ -21,9 +21,9 @@ import java.util.List;
 public class DuckRestController {
 
     // todos current priority'
-    // [] - remaining endpoints
-    // [] - error handling
-    // [] - DTOs
+    // [x] - remaining endpoints
+    // [|] - error handling
+    // [|] - DTOs
     // [] - mvc mock tests
     // [] - db interaction tests
 
