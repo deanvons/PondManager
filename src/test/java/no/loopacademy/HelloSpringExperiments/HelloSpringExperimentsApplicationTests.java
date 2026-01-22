@@ -1,5 +1,7 @@
 package no.loopacademy.HelloSpringExperiments;
 
+import no.loopacademy.HelloSpringExperiments.LegacyCodeExamples.BadlyDesignedDuckService;
+import no.loopacademy.HelloSpringExperiments.Services.DuckService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,6 +10,27 @@ class HelloSpringExperimentsApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+		// Arrange
+		MockDuckRepository mock = new MockDuckRepository();
+
+		// exptedk
+		DuckService duckeService  = new DuckService(mock);
+
+		duckeService.listDucks();
+	}
+
+
+	@Test
+	void getADuck_sonth(){
+
+
+		// Arrange
+		BadlyDesignedDuckService ds = new BadlyDesignedDuckService();
+
+
+
+
 	}
 
 }

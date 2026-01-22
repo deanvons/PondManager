@@ -24,7 +24,7 @@ public class DuckService {
 
     public Duck getDuck(int id) {
         return repository.getById(id)
-                .orElseThrow(() -> new DuckNotFoundException(id));
+                .orElseThrow(() -> new DuckNotFoundException(id)); // pretty much throw exeption if duck is null same same
     }
 
     public Duck registerDuck(Duck duck) {

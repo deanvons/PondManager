@@ -1,15 +1,18 @@
-package no.loopacademy.HelloSpringExperiments.Models;
+package no.loopacademy.HelloSpringExperiments.DTOs;
+
+import no.loopacademy.HelloSpringExperiments.Models.Duck;
 
 import java.util.List;
 
-public class Pond {
+public class PondReadDTO {
 
     private Integer Id;
     private String name;
     private String location;
 
-    // navigation property/field
-    private List<Duck> duckObjects;
+    // navigation property
+    private List<Integer> duckIds;
+
 
     public Integer getId() {
         return Id;
@@ -34,12 +37,13 @@ public class Pond {
     public void setLocation(String location) {
         this.location = location;
     }
-    // map struct (mappers), infer the target and source name from the getters and setters not the field name
-    public List<Duck> getDuckObjects() {
-        return duckObjects;
+
+    public List<Integer> getDucks() {
+        return duckIds;
     }
 
-    public void setDucks(List<Duck> ducks) {
-        this.duckObjects = ducks;
+
+    public void setDuckIds(List<Integer> duckids) {
+        this.duckIds = duckids;
     }
 }

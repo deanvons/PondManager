@@ -3,6 +3,7 @@ package no.loopacademy.HelloSpringExperiments.Controllers;
 
 import no.loopacademy.HelloSpringExperiments.DTOConverters.DuckDTOConverter;
 import no.loopacademy.HelloSpringExperiments.DTOs.DuckReadDTO;
+import no.loopacademy.HelloSpringExperiments.Mappers.DuckMapper;
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import no.loopacademy.HelloSpringExperiments.Models.Pond;
 import no.loopacademy.HelloSpringExperiments.Services.DuckService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,11 @@ public class DuckRestController {
     // same service as before, we are only changing the distribution layer
     private DuckService service;
     private DuckDTOConverter converter;
-    public DuckRestController(DuckService duckService, DuckDTOConverter converter){
+    private DuckMapper duckMapper;
+    public DuckRestController(DuckService duckService, DuckDTOConverter converter, DuckMapper duckMapper){
         this.service  = duckService;
         this.converter = converter;
+        this.duckMapper = duckMapper;
     }
 
 
@@ -82,7 +86,7 @@ public class DuckRestController {
 //        if(message == "secret") -> doesnt compare the value it compares the
         var modelDuck = service.getDuck(id);
 
-        var duckReadDto = converter.duckToReadDTO(modelDuck);
+        var duckReadDto = duckMapper.toReadDTO(modelDuck);
 
         return ResponseEntity.ok(duckReadDto);
     }
@@ -115,6 +119,8 @@ public class DuckRestController {
     // GET /ducks/{id}
     @GetMapping("/ducks/{id}")
     public ResponseEntity<Duck> getDuckById(@PathVariable Integer id) {
+//        if(id == 9)
+//       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Duck does not exist with ID" );
         return ResponseEntity.ok(service.getDuck(id));
     }
 
