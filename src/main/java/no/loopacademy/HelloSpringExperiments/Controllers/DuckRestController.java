@@ -41,6 +41,13 @@ public class DuckRestController {
     }
 
 
+    @GetMapping("/livetest")
+    public ResponseEntity<String> getTest (){
+//        if(message == "secret") -> doesnt compare the value it compares the
+       return ResponseEntity.ok("LIVE");
+    }
+
+
     // uri GET https:localhost:8080/ducks
     @GetMapping("/ducks")
     public List<Duck> getDucks() {
