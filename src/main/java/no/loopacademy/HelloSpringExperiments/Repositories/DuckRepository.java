@@ -1,4 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.DataAccess;
+package no.loopacademy.HelloSpringExperiments.Repositories;
 
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
 

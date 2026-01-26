@@ -1,7 +1,7 @@
 package no.loopacademy.HelloSpringExperiments.Controllers;
 
 
-import no.loopacademy.HelloSpringExperiments.DTOConverters.DuckDTOConverter;
+
 import no.loopacademy.HelloSpringExperiments.DTOs.DuckReadDTO;
 import no.loopacademy.HelloSpringExperiments.Mappers.DuckMapper;
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,31 +21,28 @@ import java.util.List;
 @RestController
 public class DuckRestController {
 
-    // todos current priority'
+    // todos current priority
     // [x] - remaining endpoints
-    // [|] - error handling
+    // [x] - error handling
     // [|] - DTOs
     // [] - mvc mock tests
     // [] - db interaction tests
+    // [] - env and config demo
 
 
     // same service as before, we are only changing the distribution layer
     private DuckService service;
-    private DuckDTOConverter converter;
+
     private DuckMapper duckMapper;
-    public DuckRestController(DuckService duckService, DuckDTOConverter converter, DuckMapper duckMapper){
+    public DuckRestController(DuckService duckService, DuckMapper duckMapper){
         this.service  = duckService;
-        this.converter = converter;
         this.duckMapper = duckMapper;
     }
 
-
     @GetMapping("/livetest")
     public ResponseEntity<String> getTest (){
-//        if(message == "secret") -> doesnt compare the value it compares the
        return ResponseEntity.ok("LIVE");
     }
-
 
     // uri GET https:localhost:8080/ducks
     @GetMapping("/ducks")
@@ -57,77 +53,12 @@ public class DuckRestController {
 
     @GetMapping("/ducks/models/{id}")
     public ResponseEntity<Duck> getDuckModelById (@PathVariable Integer id){
-//        if(message == "secret") -> doesnt compare the value it compares the
         var modelDuck = service.getDuck(id);
-
         return ResponseEntity.ok(modelDuck);
     }
-
-    @GetMapping("/sampleLoadedDuck")
-    public ResponseEntity<Duck> getDuckModelLoaded (){
-
-        Pond pond = new Pond();
-        pond.setId(1);
-        pond.setLocation("Løkka");
-        pond.setName("Junky Bridge");
-
-        var modelDuck = new Duck();
-        modelDuck.setId(2);
-        modelDuck.setAge(4);
-        modelDuck.setNickName("Jeff");
-        modelDuck.setWeight(43.2);
-        modelDuck.setPondId(1);
-        modelDuck.setPond(pond);
-
-        List<Duck> ducks = new ArrayList<>();
-        ducks.add(modelDuck);
-
-        pond.setDucks(ducks);
-
-        return ResponseEntity.ok(modelDuck);
-    }
-
-
-    @GetMapping("/ducks/DTO/{id}")
-    public ResponseEntity<DuckReadDTO> getDTODuckById (@PathVariable Integer id){
-//        if(message == "secret") -> doesnt compare the value it compares the
-        var modelDuck = service.getDuck(id);
-
-        var duckReadDto = duckMapper.toReadDTO(modelDuck);
-
-        return ResponseEntity.ok(duckReadDto);
-    }
-
-    @GetMapping("/http/sampleresponse")
-    public ResponseEntity<Void> getSampleHTTPResponseNoInput (){
-//        if(message == "secret") -> doesnt compare the value it compares the
-        return ResponseEntity.notFound().build();
-    }
-
-
-    @GetMapping("/http/sample/{message}")
-    public ResponseEntity<Void> getSampleHTTPResponse (@PathVariable String message){
-//        if(message == "secret") -> doesnt compare the value it compares the
-        if ("secret".equals(message))
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("/http/sample")
-    public ResponseEntity<Void> getSampleHTTPResponseWithRequestParam (@RequestParam String name){
-//        if(message == "secret") -> doesnt compare the value it compares the
-        if ("dean".equals(name))
-            return ResponseEntity.internalServerError().build();
-        else
-            return ResponseEntity.badRequest().build();
-    }
-
     // GET /ducks/{id}
     @GetMapping("/ducks/{id}")
     public ResponseEntity<Duck> getDuckById(@PathVariable Integer id) {
-//        if(id == 9)
-//       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Duck does not exist with ID" );
         return ResponseEntity.ok(service.getDuck(id));
     }
 

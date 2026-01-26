@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments;
 
-import no.loopacademy.HelloSpringExperiments.LegacyCodeExamples.BadlyDesignedDuckService;
+import no.loopacademy.HelloSpringExperiments.FlaggedForDelete.LegacyCodeExamples.BadlyDesignedDuckService;
 import no.loopacademy.HelloSpringExperiments.Services.DuckService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

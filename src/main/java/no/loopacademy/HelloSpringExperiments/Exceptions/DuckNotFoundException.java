@@ -1,4 +1,4 @@
-package no.loopacademy.HelloSpringExperiments.CustomExceptions;
+package no.loopacademy.HelloSpringExperiments.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

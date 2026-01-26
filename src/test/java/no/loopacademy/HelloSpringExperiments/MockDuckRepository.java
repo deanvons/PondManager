@@ -1,6 +1,6 @@
 package no.loopacademy.HelloSpringExperiments;
 
-import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
+import no.loopacademy.HelloSpringExperiments.Repositories.DuckRepository;
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
 
 import java.util.List;

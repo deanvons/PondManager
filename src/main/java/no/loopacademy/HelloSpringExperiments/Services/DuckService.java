@@ -1,8 +1,8 @@
 package no.loopacademy.HelloSpringExperiments.Services;
 
-import no.loopacademy.HelloSpringExperiments.CustomExceptions.DuckNotFoundException;
-import no.loopacademy.HelloSpringExperiments.CustomExceptions.InvalidDuckException;
-import no.loopacademy.HelloSpringExperiments.DataAccess.DuckRepository;
+import no.loopacademy.HelloSpringExperiments.Exceptions.DuckNotFoundException;
+import no.loopacademy.HelloSpringExperiments.Exceptions.InvalidDuckException;
+import no.loopacademy.HelloSpringExperiments.Repositories.DuckRepository;
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import org.springframework.stereotype.Component;
 
