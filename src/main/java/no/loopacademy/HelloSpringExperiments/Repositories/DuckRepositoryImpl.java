@@ -1,8 +1,10 @@
 package no.loopacademy.HelloSpringExperiments.Repositories;
 
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,24 @@ import java.util.Optional;
 @Component
 public class DuckRepositoryImpl implements  DuckRepository{
 
-    private String dburl= "jdbc:postgresql://localhost:5432/PondManager";
-    private String username= "postgres";
-    private String password= "postgres";
+    private final String dburl;
+    private final String username;
+    private final String password;
+
+    // alternative
+    private final DataSource dataSource;
+
+    public DuckRepositoryImpl(
+            @Value("${spring.datasource.url}") String dburl,
+            @Value("${spring.datasource.username}") String username,
+            @Value("${spring.datasource.password}") String password,
+            DataSource dataSource
+    ) {
+        this.dburl = dburl;
+        this.username = username;
+        this.password = password;
+        this.dataSource = dataSource;
+    }
 
     @Override
     public List<Duck> getAll() {
@@ -56,6 +73,7 @@ public class DuckRepositoryImpl implements  DuckRepository{
         Duck duck = null;
 
         try (
+                // Connection connection = dataSource.getConnection();
                 Connection connection = DriverManager.getConnection(dburl, username, password);
                 PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
