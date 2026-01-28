@@ -1,130 +1,103 @@
 package no.loopacademy.HelloSpringExperiments.Repositories;
 
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@Component
-public class DuckRepositoryImpl implements  DuckRepository{
+@Repository
+public class DuckRepositoryImpl implements DuckRepository {
 
-    private String dburl= "jdbc:postgresql://localhost:5432/PondManager";
-    private String username= "postgres";
-    private String password= "postgres";
+    private final DataSource dataSource;
+
+    public DuckRepositoryImpl(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Override
     public List<Duck> getAll() {
         List<Duck> ducks = new ArrayList<>();
-
-        // SQL
         String sql = "SELECT id, nickname, age, weight FROM duck";
 
         try (
-                // Connect
-                Connection connection = DriverManager.getConnection(dburl, username, password);
-                // Execute
+                Connection connection = dataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql);
-                // Handle Result
                 ResultSet rs = stmt.executeQuery()
         ) {
-
-            // Package result
             while (rs.next()) {
-                Duck duck = new Duck();
-                duck.setId(rs.getInt("id"));
-                duck.setNickName(rs.getString("nickname"));
-                duck.setAge(rs.getInt("age"));
-                duck.setWeight(rs.getDouble("weight"));
-
-                ducks.add(duck);
+                ducks.add(mapRow(rs));
             }
-
+            return ducks;
         } catch (SQLException e) {
             throw new RuntimeException("Failed to fetch ducks", e);
         }
-
-        // Return
-        return ducks;
     }
 
     @Override
     public Optional<Duck> getById(int id) {
         String sql = "SELECT id, nickname, age, weight FROM duck WHERE id = ?";
-        Duck duck = null;
 
         try (
-                Connection connection = DriverManager.getConnection(dburl, username, password);
+                Connection connection = dataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
             stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    duck = mapRow(rs);
-                }
-
+                if (rs.next()) return Optional.of(mapRow(rs));
+                return Optional.empty();
             }
-
         } catch (SQLException e) {
             throw new RuntimeException("Failed to fetch duck with id " + id, e);
         }
-
-        return Optional.ofNullable(duck);
     }
 
     @Override
     public Duck register(Duck duck) {
-        String sql = """
-            INSERT INTO duck (nickname, age, weight)
-            VALUES (?, ?, ?)
-            RETURNING id
-        """;
+        // Portable across Postgres + H2: use generated keys instead of RETURNING
+        String sql = "INSERT INTO duck (nickname, age, weight) VALUES (?, ?, ?)";
 
         try (
-                Connection connection = DriverManager.getConnection(dburl, username, password);
-                PreparedStatement stmt = connection.prepareStatement(sql)
+                Connection connection = dataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
         ) {
-
             stmt.setString(1, duck.getNickName());
             stmt.setInt(2, duck.getAge());
             stmt.setDouble(3, duck.getWeight());
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    duck.setId(rs.getInt("id"));
+            int affected = stmt.executeUpdate();
+            if (affected != 1) throw new RuntimeException("Insert failed, affected rows: " + affected);
+
+            try (ResultSet keys = stmt.getGeneratedKeys()) {
+                if (keys.next()) {
+                    duck.setId(keys.getInt(1));
+                } else {
+                    throw new RuntimeException("Insert succeeded but no generated key returned");
                 }
             }
 
+            return duck;
         } catch (SQLException e) {
             throw new RuntimeException("Failed to insert duck", e);
         }
-
-        return duck;
     }
 
     @Override
     public boolean update(Duck duck) {
-        String sql = """
-            UPDATE duck
-            SET nickname = ?, age = ?, weight = ?
-            WHERE id = ?
-        """;
+        String sql = "UPDATE duck SET nickname = ?, age = ?, weight = ? WHERE id = ?";
 
         try (
-                Connection connection = DriverManager.getConnection(dburl, username, password);
+                Connection connection = dataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
-
             stmt.setString(1, duck.getNickName());
             stmt.setInt(2, duck.getAge());
             stmt.setDouble(3, duck.getWeight());
             stmt.setInt(4, duck.getId());
 
             return stmt.executeUpdate() == 1;
-
         } catch (SQLException e) {
             throw new RuntimeException("Failed to update duck with id " + duck.getId(), e);
         }
@@ -135,19 +108,15 @@ public class DuckRepositoryImpl implements  DuckRepository{
         String sql = "DELETE FROM duck WHERE id = ?";
 
         try (
-                Connection connection = DriverManager.getConnection(dburl, username, password);
+                Connection connection = dataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)
         ) {
-
             stmt.setInt(1, id);
             return stmt.executeUpdate() == 1;
-
         } catch (SQLException e) {
             throw new RuntimeException("Failed to delete duck with id " + id, e);
         }
     }
-
-
 
     private Duck mapRow(ResultSet rs) throws SQLException {
         Duck duck = new Duck();
