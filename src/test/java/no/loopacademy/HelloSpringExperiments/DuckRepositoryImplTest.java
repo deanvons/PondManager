@@ -3,7 +3,7 @@ package no.loopacademy.HelloSpringExperiments;
 import no.loopacademy.HelloSpringExperiments.Models.Duck;
 import no.loopacademy.HelloSpringExperiments.Repositories.DuckRepository;
 import no.loopacademy.HelloSpringExperiments.Repositories.DuckRepositoryImpl;
-import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.context.annotation.Import;
@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.jdbc.SqlConfig;
+import org.junit.jupiter.api.Test;
 
 @JdbcTest
 @ActiveProfiles("test")
