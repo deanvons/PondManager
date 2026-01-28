@@ -26,14 +26,14 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.disable())
                 .csrf(csrf -> csrf.disable())
 
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated()
-
-                        // how does OAuth verify the JWT is legit and not compromised
-                        // SIGNATURE = sign(DATA, PRIVATE_KEY)
-                        // verify(DATA, SIGNATURE, PUBLIC_KEY)
-
-                )
+//                .authorizeHttpRequests(auth -> auth
+//                        .anyRequest().authenticated()
+//
+//                        // how does OAuth verify the JWT is legit and not compromised
+//                        // SIGNATURE = sign(DATA, PRIVATE_KEY)
+//                        // verify(DATA, SIGNATURE, PUBLIC_KEY)
+//
+//                )
 
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt

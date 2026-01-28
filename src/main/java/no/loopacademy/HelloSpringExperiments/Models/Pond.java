@@ -1,45 +1,62 @@
 package no.loopacademy.HelloSpringExperiments.Models;
 
+import jakarta.persistence.*;
 import java.util.List;
 
-public class Pond {
 
-    private Integer Id;
-    private String name;
-    private String location;
 
-    // navigation property/field
-    private List<Duck> duckObjects;
+    @Entity
+    @Table(name = "pond")
+    public class Pond {
 
-    public Integer getId() {
-        return Id;
-    }
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
+        private Integer Id;
 
-    public void setId(Integer id) {
-        Id = id;
-    }
+        @Column(name = "name")
+        private String name;
 
-    public String getName() {
-        return name;
-    }
+        @Column(name = "location")
+        private String location;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        // inverse side of Duck -> Pond
+        // Duck owns the relationship via pond_id
+        @OneToMany(mappedBy = "pond", fetch = FetchType.LAZY)
+        private List<Duck> duckObjects;
 
-    public String getLocation() {
-        return location;
-    }
+        public Pond() {}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    // map struct (mappers), infer the target and source name from the getters and setters not the field name
-    public List<Duck> getDuckObjects() {
-        return duckObjects;
-    }
+        public Integer getId() {
+            return Id;
+        }
 
-    public void setDucks(List<Duck> ducks) {
-        this.duckObjects = ducks;
-    }
+        public void setId(Integer id) {
+            Id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        // MapStruct-safe: uses getters/setters, not fields
+        public List<Duck> getDuckObjects() {
+            return duckObjects;
+        }
+
+        public void setDucks(List<Duck> ducks) {
+            this.duckObjects = ducks;
+        }
 }
