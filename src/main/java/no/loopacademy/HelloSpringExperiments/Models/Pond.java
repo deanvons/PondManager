@@ -25,6 +25,9 @@ import java.util.List;
         @OneToMany(mappedBy = "pond", fetch = FetchType.LAZY)
         private List<Duck> duckObjects;
 
+        @ManyToMany(mappedBy = "ponds", fetch = FetchType.LAZY)
+        private List<Worbler> worblers;
+
         public Pond() {}
 
         public Integer getId() {
@@ -49,6 +52,14 @@ import java.util.List;
 
         public void setLocation(String location) {
             this.location = location;
+        }
+
+        public List<Worbler> getWorblers() {
+            return worblers;
+        }
+
+        public void setWorblers(List<Worbler> worblers) {
+            this.worblers = worblers;
         }
 
         // MapStruct-safe: uses getters/setters, not fields
