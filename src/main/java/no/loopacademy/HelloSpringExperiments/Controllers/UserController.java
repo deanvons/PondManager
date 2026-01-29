@@ -61,7 +61,7 @@ public class UserController {
     }
 
     // 4) Example: require either role
-    @PreAuthorize("hasAnyRole('admin','manager')")
+    @PreAuthorize("hasAnyRole('admin','manager','SUPERUSER')")
     @GetMapping("/management")
     public Map<String, String> management() {
         return Map.of("message", "You are admin or manager.");
