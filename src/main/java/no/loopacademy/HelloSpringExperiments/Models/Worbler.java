@@ -1,10 +1,12 @@
 package no.loopacademy.HelloSpringExperiments.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "worbler")
+@JsonIgnoreProperties({"ponds"})
 public class Worbler {
 
     @Id

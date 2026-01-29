@@ -1,17 +1,64 @@
 package no.loopacademy.HelloSpringExperiments.Models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
-    // This class represents the user
-    // The user/ornothogist interacts with the information about ducks
-    // not the ducks themselves
-    // What does the system actually need to store about the ornothologist
-    // Likely 1) UserId, 2) username, 3) email ....
-    // Thus this class is just an entity
-    // The objects that act on Duck data is what we need to focus on
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private Integer Id;
-    private String userName;
-    private String emailAddress;
+    @Column(name = "orno_certificate_code", length = 100)
+    private String ornoCertificateCode;
 
+    @Column(name = "years_experience")
+    private Integer yearsExperience;
+
+    // FK-ish reference to JWT subject (not a real FK usually)
+    @Column(name = "jwt_sub", unique = true, nullable = false, length = 120)
+    private String jwtSub;
+
+    public User() {}
+
+    public User(String ornoCertificateCode, Integer yearsExperience, String jwtSub) {
+        this.ornoCertificateCode = ornoCertificateCode;
+        this.yearsExperience = yearsExperience;
+        this.jwtSub = jwtSub;
+    }
+
+    // Getters & Setters
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getOrnoCertificateCode() {
+        return ornoCertificateCode;
+    }
+
+    public void setOrnoCertificateCode(String ornoCertificateCode) {
+        this.ornoCertificateCode = ornoCertificateCode;
+    }
+
+    public Integer getYearsExperience() {
+        return yearsExperience;
+    }
+
+    public void setYearsExperience(Integer yearsExperience) {
+        this.yearsExperience = yearsExperience;
+    }
+
+    public String getJwtSub() {
+        return jwtSub;
+    }
+
+    public void setJwtSub(String jwtSub) {
+        this.jwtSub = jwtSub;
+    }
 }

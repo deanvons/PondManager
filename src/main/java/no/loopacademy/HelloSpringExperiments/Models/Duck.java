@@ -1,9 +1,11 @@
 package no.loopacademy.HelloSpringExperiments.Models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 // Spring no longer manages this classes object creation. It is a pure value object / entity
 @Entity
 @Table(name = "duck")
+@JsonIgnoreProperties({"pond"}) // or ignore pond when serializing duck
 public class Duck {
 
     @Id

@@ -1,5 +1,6 @@
 package no.loopacademy.HelloSpringExperiments.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
     @Entity
     @Table(name = "pond")
+    @JsonIgnoreProperties({"duckObjects", "worblers"}) // ignore collections to stop recursion
     public class Pond {
 
         @Id
